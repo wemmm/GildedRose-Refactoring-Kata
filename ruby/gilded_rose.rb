@@ -53,6 +53,13 @@ class GildedRose
   end
 end
 
+def normal_update(item)
+  if item.name != "Aged Brie" || "Sulfuras, Hand of Ragnaros" || "Backstage passes to a TAFKAL80ETC concert"
+    item.sell_in -= 1
+    item.quality -= 1
+  end
+end
+
 class Item
   attr_accessor :name, :sell_in, :quality
 
