@@ -53,11 +53,25 @@ class GildedRose
   end
 end
 
-def normal_update(item)
-  if item.name != "Aged Brie" || "Sulfuras, Hand of Ragnaros" || "Backstage passes to a TAFKAL80ETC concert"
-    item.sell_in -= 1
-    item.quality -= 1
+public
+
+  def normal_update
+    @items.each do |item|
+      if item.name != "Aged Brie" || "Sulfuras, Hand of Ragnaros" || "Backstage passes to a TAFKAL80ETC concert"
+        item.sell_in -= 1
+        item.quality -= 1 unless item.quality == 0
+      end
+    end
   end
+
+  def brie_update()
+    if item.name == "Aged Brie" && item.sell_in > 0
+      item.sell_in -= 1
+      item.quality -= 1
+    elsif item.name == "Aged Brie" && item.sell_in = 0
+      item.sell_in -= 1
+      item.quality -= 1
+    end
 end
 
 class Item

@@ -15,7 +15,7 @@ describe GildedRose do
       expect(items[0].quality).to eq 0
     end
 
-    it "quality degrades by one per update for normal items" do
+    it "degrades quality by one per update for normal items" do
       items = [Item.new("foo", 5, 10)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 9
@@ -72,6 +72,26 @@ describe GildedRose do
     it "decreases quality of backstage passes to 0 if SellIn is 0" do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 10)]
       GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
+  end
+
+  describe "#normal_update" do
+    it "degrades quality by 1 per update" do
+      items = [Item.new("foo", 5, 10)]
+      GildedRose.new(items).normal_update()
+      expect(items[0].quality).to eq 9
+    end
+
+    it "decreases sell_in by 1 per update" do
+      items = [Item.new("foo", 5, 10)]
+      GildedRose.new(items).normal_update()
+      expect(items[0].sell_in).to eq 4
+    end
+
+    it "does not decrease quality below 0" do
+      items = [Item.new("foo", 5, 0)]
+      GildedRose.new(items).normal_update()
       expect(items[0].quality).to eq 0
     end
   end
